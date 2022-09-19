@@ -1,0 +1,27 @@
+.account {
+  display: flex;
+}
+.account_name {
+  margin: 0 10px 0 0;
+}
+
+.balance {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: fit-content(50px) fit-content(200px);
+  margin: 10px 0;
+}
+.balance_item {
+  margin: 0;
+}
+
+.market_info td {
+  text-align: right;
+  padding: 2px 5px;
+}
+.market_info thead td {
+  text-align: left;
+}
+.market_info thead td {
+  padding-bottom: 10px;
+}

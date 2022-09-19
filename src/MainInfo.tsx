@@ -5,6 +5,8 @@ import {Contract} from "near-api-js";
 import {MarketInfo, Markets} from "./types";
 import BigNumber from "bignumber.js";
 
+import "./MainInfo.css";
+
 type MainInfoProps = {};
 
 export const MainInfo: FC<MainInfoProps> = () => {
@@ -36,23 +38,31 @@ export const MainInfo: FC<MainInfoProps> = () => {
   const [market, setMarket] = useState<MarketInfo | undefined>();
   const viewMarket = useCallback((event: ChangeEvent<HTMLSelectElement>) => {
     if (!contract) return;
-    if (event.target.value === '-1') return;
+
+    const val = +event.target.value;
+
+    if (val === -1) {
+      setMarket(undefined);
+      return;
+    }
 
     // Poor contract typings
     // @ts-ignore
-    contract.view_market({market_id: +event.target.value}).then(res => setMarket(res));
+    contract.view_market({market_id: val}).then(res => setMarket(res));
   }, [contract]);
-
-  useEffect(() => {
-    console.log(market);
-  }, [market]);
 
   return (
     <div>
-      <a href='/'>Logout</a>
-      <p>{walletConnection?.getAccountId()}</p>
-      <p>{accountBalance?.total}</p>
-      <p>{accountBalance?.available}</p>
+      <div className={'account'}>
+        <p className={'account_name'}>{walletConnection?.getAccountId()}</p>
+        <a href='/'>Logout</a>
+      </div>
+      <div className={'balance'}>
+        <p className={'balance_item'}>Total</p>
+        <p className={'balance_item'}>{accountBalance?.total}</p>
+        <p className={'balance_item'}>Available</p>
+        <p className={'balance_item'}>{accountBalance?.available}</p>
+      </div>
 
       <select onChange={viewMarket}>
         <option value={-1}>Select market</option>
@@ -64,7 +74,7 @@ export const MainInfo: FC<MainInfoProps> = () => {
       {market !== undefined ? (
         <>
           <p>Ask Orders</p>
-          <table>
+          <table className={'market_info'}>
             <thead>
             <tr>
               <td>Price</td>
@@ -78,9 +88,11 @@ export const MainInfo: FC<MainInfoProps> = () => {
               </tr>
             ))}
           </table>
+
           <hr/>
+
           <p>Bid Orders</p>
-          <table>
+          <table className={'market_info'}>
             <thead>
             <tr>
               <td>Price</td>

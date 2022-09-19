@@ -1,12 +1,10 @@
-import {FC, useCallback, MouseEvent} from "react";
+import {FC, MouseEvent, useCallback} from "react";
 import {Connection} from "./Connection";
+import {FALLBACK_URL} from "./Login";
 
-export const FALLBACK_URL =
-  'https://wallet.testnet.near.org/login/?success_url=http%3A%2F%2Flocalhost%3A3000%2Fsuccess&failure_url=http%3A%2F%2Flocalhost%3A3000%2Ffailure&contract_id=example-contract.testnet'
+type FailureProps = {};
 
-type LoginProps = {};
-
-export const Login: FC<LoginProps> = () => {
+export const Failure: FC<FailureProps> = () => {
   const login = useCallback((event: MouseEvent) => {
     event.preventDefault();
 
@@ -21,5 +19,5 @@ export const Login: FC<LoginProps> = () => {
     );
   }, []);
 
-  return <a href={FALLBACK_URL} onClick={login}>Login</a>;
-}
+  return <p>Login failed. Please, <a href={FALLBACK_URL} onClick={login}>try again</a>.</p>
+};

@@ -4,6 +4,7 @@ import {RouterProvider, createBrowserRouter} from "react-router-dom";
 
 import {Login} from "./Login";
 import {MainInfo} from "./MainInfo";
+import {Failure} from "./Failure";
 
 const router = createBrowserRouter([
   {
@@ -19,14 +20,14 @@ const router = createBrowserRouter([
   {
     path: 'failure',
     element:
-      <div>Failure</div>
+      <Failure/>
   }
 ]);
 
 type AppProps = {};
 
 const App: FC<AppProps> = () => {
-  return <RouterProvider router={router}/>
+  return <RouterProvider router={router}/>;
 }
 
 export default App;

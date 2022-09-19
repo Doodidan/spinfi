@@ -1,11 +1,15 @@
-import {useCallback} from "react";
+import {FC, useCallback, MouseEvent} from "react";
 import {Connection} from "./Connection";
 
 const FALLBACK_URL =
   'https://wallet.testnet.near.org/login/?success_url=http%3A%2F%2Flocalhost%3A3000%2Fsuccess&failure_url=http%3A%2F%2Flocalhost%3A3000%2Ffailure&contract_id=example-contract.testnet'
 
-export default () => {
-  const login = useCallback(() => {
+type LoginProps = {};
+
+export const Login: FC<LoginProps> = () => {
+  const login = useCallback((event: MouseEvent) => {
+    event.preventDefault();
+
     Connection.walletConnection?.requestSignIn({
         contractId:
           "example-contract.testnet", // contract requesting access,

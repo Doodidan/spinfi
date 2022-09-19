@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {FC} from 'react';
 import './App.css';
 import {RouterProvider, createBrowserRouter} from "react-router-dom";
 
-import Login from "./Login";
+import {Login} from "./Login";
+import {MainInfo} from "./MainInfo";
 
 const router = createBrowserRouter([
   {
@@ -13,7 +14,7 @@ const router = createBrowserRouter([
   {
     path: 'success',
     element:
-      <div>Hooray</div>
+      <MainInfo/>
   },
   {
     path: 'failure',
@@ -22,9 +23,12 @@ const router = createBrowserRouter([
   }
 ]);
 
-export default () => {
+type AppProps = {};
+
+const App: FC<AppProps> = () => {
   return <RouterProvider router={router}/>
 }
 
+export default App;
 
 

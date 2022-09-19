@@ -20,11 +20,17 @@ class Connection {
   constructor() {
     this.init();
   }
+
+  readyPromiseResolve: Function | undefined;
+  public readyPromise: Promise<void> = new Promise<void>((resolve) => {
+    this.readyPromiseResolve = resolve;
+  })
+
   private async init() {
     this.nearConnection = await connect(this.connectionConfig);
+    if (this.readyPromiseResolve) this.readyPromiseResolve()
     this.walletConnection = new WalletConnection(this.nearConnection, 'spinfi');
   }
-
 }
 
 const connectionInstance = new Connection();

@@ -10,3 +10,33 @@ export type ConnectionConfig = {
   helperUrl: string,
   explorerUrl: string,
 };
+
+export type Market = {
+  id: number,
+  base: {
+    ticker: string,
+    decimal: number,
+    address: string,
+  },
+  quote: {
+    ticker: string,
+    decimal: number,
+    address: string,
+  },
+  fee: number
+}
+
+export type Markets = Array<Market>;
+
+export type MarketInfo = {
+  ask_orders:
+    {
+      price: number,
+      quantity: number,
+    }[],
+  bid_orders:
+    {
+      price: number,
+      quantity: number,
+    }[]
+}
